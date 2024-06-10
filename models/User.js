@@ -15,6 +15,11 @@ class User {
     const results = await db.raw(query, [id])
     return results[0]
   }
+
+  static async create(username, firstName, lastName, email, avatar, password) {
+    const query =
+      'INSERT INTO users (username, firstName, lastName, email, avatar, password) VALUES (?, ?, ?, ?, ?, ?) RETURNING *'
+  }
 }
 
 export default User

@@ -16,12 +16,18 @@ class Product {
     return results[0]
   }
 
-//   static async create(username, verified) {
-//     const query =
-//       'INSERT INTO products (username, verified) VALUES (?, ?) RETURNING *'
-//     const results = await db.raw(query, [username, verified])
-//     return results[0]
-//   }
+  static async create(name, description, price, stockQuantity, imageURL) {
+    const query =
+      'INSERT INTO products (name, description, price, stockQuantity, imageURL) VALUES (?, ?, ?, ?, ?) RETURNING *'
+  }
+
+
+  static async findByCategory(category) {
+    const query = `SELECT * FROM products WHERE category = ?`
+    const results = await db.raw(query, [category])
+    return results
+  }
+
 }
 
 export default Product
