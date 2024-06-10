@@ -19,6 +19,8 @@ class Product {
   static async create(name, description, price, stockQuantity, imageURL) {
     const query =
       'INSERT INTO products (name, description, price, stockQuantity, imageURL) VALUES (?, ?, ?, ?, ?) RETURNING *'
+      const results = await db.raw(query)
+      return results
   }
 
 
