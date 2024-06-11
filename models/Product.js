@@ -16,11 +16,11 @@ class Product {
     return results[0]
   }
 
-  static async create(name, description, price, stockQuantity, imageURL) {
+  static async create(newProduct) {
     const query =
       'INSERT INTO products (name, description, price, stockQuantity, imageURL) VALUES (?, ?, ?, ?, ?) RETURNING *'
-      const results = await db.raw(query)
-      return results
+      const results = await db.raw(query, [newProduct.name, newProduct.description, newProduct.price, newProduct.stockQuantity, newProduct.imageURL])
+      return results[0]
   }
 
 
@@ -31,5 +31,8 @@ class Product {
   }
 
 }
+const results = await Product.findByCategory('Baby')
+console.log(results)
+
 
 export default Product
