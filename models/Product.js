@@ -25,14 +25,20 @@ class Product {
 
 
   static async findByCategory(category) {
-    const query = `SELECT * FROM products WHERE category = ?`
+    const query = `
+    SELECT products.id, products.name, products.description, products.price, products.stockQuantity, products.imageURL
+    FROM products 
+    INNER JOIN product_categories ON products.id = product_categories.productId
+    INNER JOIN categories ON product_categories.categoryId = categories.ID
+    WHERE categories.name = ?
+    `
     const results = await db.raw(query, [category])
     return results
   }
 
 }
-const results = await Product.findByCategory('Baby')
-console.log(results)
+
+
 
 
 export default Product
