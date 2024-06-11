@@ -7,10 +7,31 @@ class Review {
     return results
   }
 
-//   static async create(name, description, price, stockQuantity, imageURL) {
-//     const query =
-//       'INSERT INTO products (name, description, price, stockQuantity, imageURL) VALUES (?, ?, ?, ?, ?) RETURNING *'
-//   }
+  static async findByProductId(id) {
+    const query = `SELECT * FROM reviews WHERE productId = ?`
+    const results = await db.raw(query, [id])
+    return results
+  }
+
+
+  static async create(newReview) {
+    const query =
+      "INSERT INTO reviews (productId, userId, rating, reviewText) VALUES (?, ?, ?, ?) RETURNING *";
+    const results = await db.raw(query, [
+      newReview.productId,
+      newReview.userId,
+      newReview.rating,
+      newReview.reviewText,
+    ])
+    return results[0]
+  }
+
+  static async productAverageRating(id) {
+    const query = `SELECT AVG(rating) AS averageRating FROM reviews WHERE productId = ?`
+    const results = await db.raw(query, [id])
+    return results[0].averageRating
+  }
+
 
 }
 
