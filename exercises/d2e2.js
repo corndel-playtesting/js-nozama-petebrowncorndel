@@ -14,6 +14,14 @@ app.get('/sumup', (req, res) => {
    * if n is not given, respond with 0
    * e.g. /sumup?n=4 => 10
    */
+  let total = 0
+  const n = parseInt(req.query.n)
+
+  for(let i = 1; i <= n; i++) {
+    total += i
+  }
+  const result = total.toString()
+  res.send(result)
 })
 
 // https://tech-docs.corndel.com/express/query-params.html
@@ -22,6 +30,9 @@ app.get('/multiply/:x/:y', (req, res) => {
    * This endpoint responds with the product of x and y
    * e.g. /multiply/:3/:5 => 15
    */
+  const product = parseInt(req.params.x) * parseInt(req.params.y)
+  const result = product.toString()
+  res.send(result)
 })
 
 export default app
