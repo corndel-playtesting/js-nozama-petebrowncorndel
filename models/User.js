@@ -22,6 +22,23 @@ class User {
       const results = await db.raw(query, [newUser.username, newUser.firstName, newUser.lastName, newUser.email, newUser.avatar, newUser.password])
       return results[0]    
     }
-}
+
+    static async delete(userID) {
+      const query =
+        'DELETE FROM users WHERE id = ?'
+        const results = await db.raw(query, [userID])
+        return results
+      }
+
+      static async logIn(username, password) {
+        const query =`
+          SELECT id, username, firstName, lastName, email, avatar
+          FROM users
+          WHERE username = ? AND password = ?
+          `
+          const results = await db.raw(query, [username, password])
+          return results[0]
+        }
+  }
 
 export default User
