@@ -36,7 +36,8 @@ class User {
     return results;
   }
 
-  static async logIn(username, password) {
+  static async logIn(credentials) {
+    const { username, password } = credentials
     const query = `
           SELECT id, username, firstName, lastName, email, avatar
           FROM users

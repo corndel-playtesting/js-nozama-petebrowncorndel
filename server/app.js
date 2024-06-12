@@ -31,4 +31,9 @@ app.post('/users', async (req, res) => {
   res.json(newUser)
 })
 
+app.post('/users/login', async (req, res) => {
+  const userLogin = await User.logIn(req.body)
+  res.json(userLogin)
+})
+
 export default app
