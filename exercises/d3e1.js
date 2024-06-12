@@ -18,11 +18,20 @@ let state = {
  * It should simply res.json(state)
  */
 
+app.get("/counter", (req, res) => {
+  res.json(state)
+});
+
+
 /**
  * Add a PUT /counter/increment endpoint
  * It should increase the counter by 1 and then res.json(state)
  */
 
-app.use('/counter', router)
+app.use('/counter/increment', (req, res) => {
+  state.count ++
+  res.json(state)
+});
+
 
 export default app
