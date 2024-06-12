@@ -1,6 +1,7 @@
 import express from 'express'
 import Product from '../models/Product.js'
 import User from '../models/User.js'
+import Review from '../models/Review.js'
 
 const app = express()
 app.use(express.json())
@@ -39,6 +40,11 @@ app.post('/users/login', async (req, res) => {
 app.delete('/user/:userId', async (req, res) => {
   const userDelete = await User.delete(req.params.userId)
   res.json(userDelete)
+})
+
+app.get('/products/:productId/reviews', async (req, res) => {
+  const productReviews = await Review.findByProductId(req.params.productId)
+  res.json(productReviews)
 })
 
 export default app
