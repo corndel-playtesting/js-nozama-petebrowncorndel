@@ -36,4 +36,9 @@ app.post('/users/login', async (req, res) => {
   res.json(userLogin)
 })
 
+app.delete('/user/:userId', async (req, res) => {
+  const userDelete = await User.delete(req.params.userId)
+  res.json(userDelete)
+})
+
 export default app
