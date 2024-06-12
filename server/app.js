@@ -47,4 +47,14 @@ app.get('/products/:productId/reviews', async (req, res) => {
   res.json(productReviews)
 })
 
+app.post('/reviews', async (req, res) => {
+  const newReview = await Review.create(req.body)
+  res.json(newReview)
+})
+
+app.get('/products/:productId/reviews/average', async (req, res) => {
+  const productRating = await Review.productAverageRating(req.params.productId)
+  res.json(productRating)
+})
+
 export default app
