@@ -1,15 +1,10 @@
 import express from 'express'
 import Product from '../models/Product.js'
+import User from '../models/User.js'
 
 const app = express()
 app.use(express.json())
 
-// You can delete this endpoint
-app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to Nozama!', time: Date.now() })
-})
-
-// TODO: add endpoints during the workshop
 
 app.get('/products', async (req, res) => {
   const products = await Product.findAll()
@@ -27,8 +22,13 @@ app.get('/products/category/:category', async (req, res) => {
 })
 
 app.post('/products', async (req, res) => {
-  const newProduct = await Product.create(req.body.name, req.body.description, req.body.price, req.body.stockQuantity, req.body.imageURL)
+  const newProduct = await Product.create(req.body)
   res.json(newProduct)
+})
+
+app.post('/users', async (req, res) => {
+  const newUser = await User.create(req.body)
+  res.json(newUser)
 })
 
 export default app
