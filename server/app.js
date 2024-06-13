@@ -1,13 +1,13 @@
 import express from 'express'
+import productRouter from '../routers/products.js'
+import userRouter from '../routers/users.js'
+import reviewRouter from '../routers/reviews.js'
 
 const app = express()
 app.use(express.json())
 
-// You can delete this endpoint
-app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to Nozama!', time: Date.now() })
-})
-
-// TODO: add endpoints during the workshop
+app.use('/users', userRouter)
+app.use('/products', productRouter)
+app.use('/reviews', reviewRouter)
 
 export default app
