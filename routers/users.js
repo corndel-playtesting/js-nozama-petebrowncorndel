@@ -3,9 +3,13 @@ import User from "../models/User.js";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
+  try {
   const newUser = await User.create(req.body);
-  res.json(newUser);
+  res.json(newUser)
+  } catch (err) {
+    next(err)
+  }
 });
 
 router.post("/login", async (req, res) => {
